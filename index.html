@@ -1,1 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arachnida - Indie Apps & Games</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9fafb; /* Light beige/gray background */
+            color: #1f2937; /* Dark gray for text */
+        }
+        .arachnida-purple {
+            color: #8b5cf6; /* A nice purple */
+        }
+        .arachnida-purple-bg {
+            background-color: #8b5cf6;
+        }
+        .arachnida-purple-bg:hover {
+            background-color: #7c3aed; /* Darker purple on hover */
+        }
+        .header-web-banner {
+            background-color: #f3f4f6; /* Slightly darker beige for banner */
+            border-bottom: 2px solid #e5e7eb;
+            text-align: center;
+            padding: 3rem 1rem;
+            position: relative;
+        }
+        .header-web-banner h1 {
+            font-size: 3rem; /* Large text for Arachnida */
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            position: relative;
+            display: inline-block;
+        }
+        /* Simple web line effect - can be enhanced with SVG */
+        .header-web-banner h1::before,
+        .header-web-banner h1::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 100px; /* Adjust width of lines */
+            height: 2px;
+            background-color: #a78bfa; /* Lighter purple for web lines */
+            transform: translateY(-50%);
+        }
+        .header-web-banner h1::before {
+            left: -110px; /* Position to the left */
+        }
+        .header-web-banner h1::after {
+            right: -110px; /* Position to the right */
+        }
 
+        /* Ensure cards have a consistent height if content varies */
+        .project-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* Responsive adjustments for web lines */
+        @media (max-width: 768px) {
+            .header-web-banner h1 {
+                font-size: 2.5rem;
+            }
+            .header-web-banner h1::before,
+            .header-web-banner h1::after {
+                width: 60px;
+            }
+            .header-web-banner h1::before {
+                left: -70px;
+            }
+            .header-web-banner h1::after {
+                right: -70px;
+            }
+        }
+        @media (max-width: 480px) {
+            .header-web-banner h1 {
+                font-size: 2rem;
+            }
+            .header-web-banner h1::before,
+            .header-web-banner h1::after {
+                display: none; /* Hide lines on very small screens if they cause layout issues */
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="header-web-banner">
+        <div class="container mx-auto px-4">
+            <h1 class="arachnida-purple">ARACHNIDA</h1>
+        </div>
+    </header>
+
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-center items-center h-16">
+                <div class="flex space-x-6 md:space-x-10">
+                    <a href="#featured" class="text-gray-700 hover:arachnida-purple px-3 py-2 rounded-md text-sm font-medium">Games</a>
+                    <a href="#apps" class="text-gray-700 hover:arachnida-purple px-3 py-2 rounded-md text-sm font-medium">Apps</a> <a href="#about" class="text-gray-700 hover:arachnida-purple px-3 py-2 rounded-md text-sm font-medium">About</a>
+                    <a href="#contact" class="text-gray-700 hover:arachnida-purple px-3 py-2 rounded-md text-sm font-medium">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section id="hero" class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                Weaving Ideas into <span class="arachnida-purple">Engaging Experiences</span>.
+            </h2>
+            <p class="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+                Hi, I'm an independent developer behind Arachnida. I love building unique and enjoyable apps and games from the ground up. Explore my creations and find your next favorite!
+            </p>
+            <a href="#featured" class="arachnida-purple-bg text-white font-semibold px-8 py-3 rounded-lg shadow-md hover:shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-0.5">
+                Check Out My Game
+            </a>
+        </div>
+    </section>
+
+    <section id="featured" class="py-16 md:py-20">
+        <div class="container mx-auto px-6">
+            <h3 class="text-2xl md:text-3xl font-bold text-center mb-12">My Latest Game</h3>
+            <div class="flex justify-center"> <div class="bg-white rounded-xl shadow-lg overflow-hidden project-card transform hover:scale-105 transition-transform duration-300 max-w-md"> <img src="https://placehold.co/600x400/8b5cf6/ffffff?text=Color+Dash" alt="Color Dash Game Screenshot" class="w-full h-56 object-cover"> <div class="p-6 flex flex-col flex-grow">
+                        <h4 class="text-xl font-semibold mb-2">Color Dash</h4>
+                        <p class="text-gray-600 text-sm mb-4 flex-grow">Test your reflexes! Hit the buttons when the matching color appears in this fast-paced and addictive game.</p>
+                        <a href="#" class="mt-auto self-start arachnida-purple-bg text-white text-sm font-medium px-4 py-2 rounded-md hover:shadow-md transition duration-300">View on Play Store</a>
+                    </div>
+                </div>
+            </div>
+            </div>
+    </section>
+
+    <section id="about" class="py-16 md:py-20 bg-white">
+        <div class="container mx-auto px-6 max-w-3xl text-center">
+            <h3 class="text-2xl md:text-3xl font-bold mb-6">Behind Arachnida</h3>
+            <p class="text-lg text-gray-700 mb-4">
+                Arachnida is my creative outlet, where I focus on developing fun and engaging games like Color Dash.
+            </p>
+            <p class="text-lg text-gray-700">
+                As a solo developer, I pour my energy into every detail, from concept to launch, aiming to create experiences I'm proud to share. Thanks for being a part of this journey!
+            </p>
+        </div>
+    </section>
+
+    <section id="contact" class="py-16 md:py-20">
+        <div class="container mx-auto px-6 max-w-xl text-center">
+            <h3 class="text-2xl md:text-3xl font-bold mb-6">Get In Touch</h3>
+            <p class="text-lg text-gray-700 mb-8">
+                Have a question, feedback, or just want to say hello? I'd love to hear from you!
+            </p>
+            <a href="mailto:arachnidaapps@gmail.com?subject=Message%20from%20Arachnida%20Website" class="arachnida-purple-bg text-white font-semibold px-8 py-3 rounded-lg shadow-md hover:shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-0.5">
+                Send an Email
+            </a>
+        </div>
+    </section>
+
+    <section id="apps" class="py-10 hidden"> <div class="container mx-auto px-6 text-center">
+            <h2 class="text-xl font-semibold">Apps Listing (Full Page/Section)</h2>
+            <p>This section would list all your apps.</p>
+        </div>
+    </section>
+    <footer class="bg-gray-800 text-gray-300 py-8 text-center">
+        <div class="container mx-auto px-6">
+            <p class="text-sm">&copy; <span id="currentYear"></span> Arachnida. All rights reserved.</p>
+            <p class="text-xs mt-1">Crafted with <span class="arachnida-purple">&hearts;</span> by a solo developer.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Set current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+    </script>
+
+</body>
+</html>
