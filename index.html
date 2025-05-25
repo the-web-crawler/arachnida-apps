@@ -4,431 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Arachnida is a solo indie development studio creating unique web apps and coding projects. Explore our portfolio of games, tools, and experiments.">
+    <meta name="keywords" content="indie developer, web apps, coding projects, javascript tools, html css projects, portfolio, Arachnida, game development, utility apps">
     <title>Arachnida - Indie Dev & Projects</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="/res/logo-round-700x.webp" rel="icon" sizes="700x700">
-    <style>
-        /* Base styles */
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f9fafb;
-            /* Light gray background */
-            color: #1f2937;
-            /* Dark gray for general text */
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            margin: 0;
-            /* Reset default body margin */
-        }
-
-        /* Custom Colors */
-        .arachnida-purple {
-            color: #8b5cf6;
-        }
-
-        .arachnida-purple-bg {
-            background-color: #8b5cf6;
-        }
-
-        .arachnida-purple-bg:hover {
-            background-color: #7c3aed;
-        }
-
-        /* Header Banner */
-        .header-web-banner {
-            background-color: #f3f4f6;
-            border-bottom: 2px solid #e5e7eb;
-            text-align: center;
-            padding: 3rem 1rem;
-            position: relative;
-        }
-
-        .header-web-banner h1 {
-            font-size: 3rem;
-            font-weight: 700;
-            letter-spacing: 0.05em;
-            position: relative;
-            display: inline-block;
-        }
-
-        .header-web-banner h1::before,
-        .header-web-banner h1::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            width: 100px;
-            height: 2px;
-            background-color: #a78bfa;
-            transform: translateY(-50%);
-        }
-
-        .header-web-banner h1::before {
-            left: -110px;
-        }
-
-        .header-web-banner h1::after {
-            right: -110px;
-        }
-
-        /* Navigation Bar */
-        .navbar {
-            background-color: #ffffff;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            position: sticky;
-            top: 0;
-            z-index: 50;
-        }
-
-        .navbar-container {
-            max-width: 1280px;
-            /* Equivalent to max-w-7xl, adjust as needed */
-            margin-left: auto;
-            margin-right: auto;
-            padding-left: 1rem;
-            padding-right: 1rem;
-        }
-
-        .navbar-content {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 4rem;
-            /* h-16 */
-        }
-
-        .navbar-links {
-            display: flex;
-            gap: 1.5rem;
-            /* space-x-6 */
-        }
-
-        .navbar-link {
-            color: #4b5563;
-            /* text-gray-700 */
-            padding: 0.5rem 0.75rem;
-            /* px-3 py-2 */
-            border-radius: 0.375rem;
-            /* rounded-md */
-            font-size: 0.875rem;
-            /* text-sm */
-            font-weight: 500;
-            /* font-medium */
-            text-decoration: none;
-            transition: color 0.15s ease-in-out;
-            /* transition duration-300 */
-        }
-
-        .navbar-link:hover {
-            color: #8b5cf6;
-            /* hover:arachnida-purple */
-        }
-
-        /* Section Base Styles */
-        .section-padding {
-            padding-top: 4rem;
-            /* py-16 */
-            padding-bottom: 4rem;
-            /* py-16 */
-        }
-
-        .section-container {
-            max-width: 1280px;
-            /* Equivalent to max-w-7xl, adjust as needed */
-            margin-left: auto;
-            margin-right: auto;
-            padding-left: 1.5rem;
-            /* px-6 */
-            padding-right: 1.5rem;
-            /* px-6 */
-            text-align: center;
-        }
-
-        .section-title {
-            font-size: 1.875rem;
-            /* text-3xl */
-            font-weight: 700;
-            /* font-bold */
-            margin-bottom: 1rem;
-            /* mb-4 */
-        }
-
-        .section-subtitle {
-            font-size: 1.125rem;
-            /* text-lg */
-            color: #4b5563;
-            /* text-gray-600 */
-            margin-bottom: 2rem;
-            /* mb-8 */
-            max-width: 42rem;
-            /* max-w-2xl */
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .section-button {
-            background-color: #8b5cf6;
-            color: #ffffff;
-            font-weight: 600;
-            padding: 0.75rem 2rem;
-            /* px-8 py-3 */
-            border-radius: 0.5rem;
-            /* rounded-lg */
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            /* shadow-md */
-            text-decoration: none;
-            transition: all 0.3s ease-in-out;
-            /* transition duration-300 ease-in-out */
-            display: inline-block;
-            /* For transform */
-        }
-
-        .section-button:hover {
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            /* hover:shadow-lg */
-            transform: translateY(-0.125rem);
-            /* hover:-translate-y-0.5 */
-            background-color: #7c3aed;
-            /* Darker purple on hover */
-        }
-
-        /* Project Card */
-        .project-card-wrapper {
-            display: flex;
-            justify-content: center;
-        }
-
-        .project-card {
-            background-color: #ffffff;
-            border-radius: 0.75rem;
-            /* rounded-xl */
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            /* shadow-lg */
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            /* ensures consistent height */
-            transform: scale(1);
-            transition: transform 0.3s ease-in-out;
-            /* transition-transform duration-300 */
-            max-width: 28rem;
-            /* max-w-md */
-            width: 100%;
-            /* Ensure it takes full width on small screens */
-        }
-
-        .project-card:hover {
-            transform: scale(1.05);
-            /* hover:scale-105 */
-        }
-
-        .project-card-image {
-            width: 100%;
-            /* w-full */
-            height: 14rem;
-            /* h-56 */
-            object-fit: cover;
-            /* object-cover */
-            /* Initial state for progressive loading */
-            filter: blur(10px);
-            /* Apply blur */
-            opacity: 0.5;
-            /* Reduce opacity */
-            transition: filter 0.5s ease-out, opacity 0.5s ease-out;
-            /* Smooth transition */
-        }
-
-        .project-card-image.loaded {
-            filter: blur(0);
-            /* Remove blur */
-            opacity: 1;
-            /* Full opacity */
-        }
-
-        .project-card-content {
-            padding: 1.5rem;
-            /* p-6 */
-            display: flex;
-            flex-direction: column;
-            /* flex-col */
-            flex-grow: 1;
-            /* flex-grow */
-        }
-
-        .project-card-title {
-            font-size: 1.25rem;
-            /* text-xl */
-            font-weight: 600;
-            /* font-semibold */
-            margin-bottom: 0.5rem;
-            /* mb-2 */
-        }
-
-        .project-card-description {
-            color: #4b5563;
-            /* text-gray-600 */
-            font-size: 0.875rem;
-            /* text-sm */
-            margin-bottom: 1rem;
-            /* mb-4 */
-            flex-grow: 1;
-            /* flex-grow to push button to bottom */
-        }
-
-        .project-card-button {
-            margin-top: auto;
-            /* mt-auto */
-            align-self: flex-start;
-            /* self-start */
-            background-color: #8b5cf6;
-            color: #ffffff;
-            font-size: 0.875rem;
-            /* text-sm */
-            font-weight: 500;
-            /* font-medium */
-            padding: 0.5rem 1rem;
-            /* px-4 py-2 */
-            border-radius: 0.375rem;
-            /* rounded-md */
-            text-decoration: none;
-            transition: box-shadow 0.3s ease-in-out;
-            /* hover:shadow-md transition duration-300 */
-        }
-
-        .project-card-button:hover {
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            /* shadow-md */
-        }
-
-        .more-projects-text {
-            margin-top: 3rem;
-            /* mt-12 */
-            text-align: center;
-            color: #4b5563;
-            /* text-gray-600 */
-        }
-
-        /* About Section Specifics */
-        .about-container {
-            max-width: 48rem;
-            /* max-w-3xl */
-            margin-left: auto;
-            margin-right: auto;
-            text-align: center;
-        }
-
-        /* Contact Section Specifics */
-        .contact-container {
-            max-width: 36rem;
-            /* max-w-xl */
-            margin-left: auto;
-            margin-right: auto;
-            text-align: center;
-        }
-
-        /* Footer */
-        .footer {
-            background-color: #1f2937;
-            /* bg-gray-800 */
-            color: #d1d5db;
-            /* text-gray-300 */
-            padding-top: 2rem;
-            /* py-8 */
-            padding-bottom: 2rem;
-            /* py-8 */
-            text-align: center;
-        }
-
-        .footer-container {
-            max-width: 1280px;
-            /* Equivalent to max-w-7xl, adjust as needed */
-            margin-left: auto;
-            margin-right: auto;
-            padding-left: 1.5rem;
-            /* px-6 */
-            padding-right: 1.5rem;
-            /* px-6 */
-        }
-
-        .footer-text-sm {
-            font-size: 0.875rem;
-            /* text-sm */
-        }
-
-        .footer-text-xs {
-            font-size: 0.75rem;
-            /* text-xs */
-            margin-top: 0.25rem;
-            /* mt-1 */
-        }
-
-        /* Responsive Adjustments (Media Queries) */
-        @media (min-width: 768px) {
-
-            /* md: breakpoint */
-            .section-padding {
-                padding-top: 6rem;
-                /* md:py-24 */
-                padding-bottom: 6rem;
-                /* md:py-24 */
-            }
-
-            .section-title {
-                font-size: 2.25rem;
-                /* md:text-4xl */
-            }
-
-            .section-subtitle {
-                font-size: 1.25rem;
-                /* md:text-xl */
-            }
-
-            .navbar-links {
-                gap: 2.5rem;
-                /* md:space-x-10 */
-            }
-
-            .header-web-banner h1 {
-                font-size: 2.5rem;
-            }
-
-            .header-web-banner h1::before,
-            .header-web-banner h1::after {
-                width: 60px;
-            }
-
-            .header-web-banner h1::before {
-                left: -70px;
-            }
-
-            .header-web-banner h1::after {
-                right: -70px;
-            }
-
-            .projects-section-title {
-                font-size: 2.25rem;
-                /* md:text-3xl */
-            }
-        }
-
-        @media (max-width: 480px) {
-            .header-web-banner h1 {
-                font-size: 2rem;
-            }
-
-            .header-web-banner h1::before,
-            .header-web-banner h1::after {
-                display: none;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="/css/global.css">
 </head>
 
 <body class="antialiased">
 
     <header class="header-web-banner">
         <div class="navbar-container">
-            <h1 class="arachnida-purple">ARACHNIDA</h1>
+            <h1 class="arachnida-purple-text">ARACHNIDA</h1>
         </div>
     </header>
 
@@ -444,24 +32,24 @@
         </div>
     </nav>
 
-    <section id="hero" class="section-padding bg-white">
+    <section id="hero" class="section-padding-base bg-white">
         <div class="section-container">
             <h2 class="section-title">
-                Weaving <span class="arachnida-purple">Random Ideas</span> into Engaging Code.
+                Weaving <span class="arachnida-purple-text">Random Ideas</span> into Engaging Code.
             </h2>
             <p class="section-subtitle">
                 Welcome to Arachnida, a solo indie development studio passionate about building unique and enjoyable
                 projects, primarily focused on coding. Explore our creations and find something new!
             </p>
-            <a href="#projects" class="section-button">
+            <a href="#projects" class="button-base button-primary">
                 See Our Projects
             </a>
         </div>
     </section>
 
-    <section id="projects" class="section-padding">
+    <section id="projects" class="section-padding-base">
         <div class="section-container">
-            <h3 class="section-title projects-section-title">Featured Project: Color Dash</h3>
+            <h3 class="section-title projects-section-title">Featured Projects</h3>
             <div class="project-card-wrapper">
                 <div class="project-card">
                     <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAKBueIx4ZKCMgoy0qqC+8P//8Nzc8P//////////////////////////////////////////////////////////2wBDAaq0tPDS8P//////////////////////////////////////////////////////////////////////////////wAARCAAOABQDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAED/8QAGRAAAgMBAAAAAAAAAAAAAAAAAAERMUHx/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAH/xAAVEQEBAAAAAAAAAAAAAAAAAAAAEf/aAAwDAQACEQMRAD8Az0rUcCsriNFIiAVAqP/Z"
@@ -476,6 +64,19 @@
                         <a href="#color-dash-game" class="project-card-button">Play Game</a>
                     </div>
                 </div>
+
+                <div class="project-card">
+                    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAKBueIx4ZKCMgoy0qqC+8P//8Nzc8P//////////////////////////////////////////////////////////2wBDAaq0tPDS8P//////////////////////////////////////////////////////////////////////////////wAARCAAOABQDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAED/8QAGRAAAgMBAAAAAAAAAAAAAAAAAAERMUHx/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAH/xAAVEQEBAAAAAAAAAAAAAAAAAAAAEf/aAAwDAQACEQMRAD8Az0rUcCsriNFIiAVAqP/Z"
+                        data-full-src="apps/random-event-generator/preview.jpg" alt="Random Event Generator App Screenshot"
+                        class="project-card-image lazy-load">
+                    <div class="project-card-content">
+                        <h4 class="project-card-title">Random Event Generator (App)</h4>
+                        <p class="project-card-description">
+                            Generate UUIDs, roll various types of dice, and more with this handy suite of random event tools. Useful for games, development, or just for fun!
+                        </p>
+                        <a href="apps/random-event-generator/" class="project-card-button">Use Tools</a>
+                    </div>
+                </div>
             </div>
             <div class="more-projects-text">
                 <p>More coding projects and apps coming soon!</p>
@@ -483,7 +84,7 @@
         </div>
     </section>
 
-    <section id="about" class="section-padding bg-white">
+    <section id="about" class="section-padding-base bg-white">
         <div class="section-container about-container">
             <h3 class="section-title">About Arachnida</h3>
             <p class="section-subtitle">
@@ -499,7 +100,7 @@
         </div>
     </section>
 
-    <section id="contact" class="section-padding">
+    <section id="contact" class="section-padding-base">
         <div class="section-container contact-container">
             <h3 class="section-title">Get In Touch</h3>
             <p class="section-subtitle">
@@ -507,7 +108,7 @@
                 out!
             </p>
             <a href="mailto:arachnidaapps@gmail.com?subject=Message%20from%20Arachnida%20Website"
-                class="section-button">
+                class="button-base button-primary">
                 Send an Email
             </a>
         </div>
@@ -516,63 +117,12 @@
     <footer class="footer">
         <div class="footer-container">
             <p class="footer-text-sm">&copy; <span id="currentYear"></span> Arachnida. All rights reserved.</p>
-            <p class="footer-text-xs">Crafted with <span class="arachnida-purple">&hearts;</span> by a solo developer.
+            <p class="footer-text-xs">Crafted with <span class="arachnida-purple-text">&hearts;</span> by a solo developer.
             </p>
         </div>
     </footer>
 
-    <script>
-        // JavaScript for smooth scrolling when clicking navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault(); // Prevent default anchor click behavior
-
-                const targetId = this.getAttribute('href'); // Get the target section ID
-                if (targetId === '#color-dash-game') {
-                    console.log("Attempting to open game immersive:", targetId);
-                } else {
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        targetElement.scrollIntoView({
-                            behavior: 'smooth' // Smooth scroll effect
-                        });
-                    }
-                }
-            });
-        });
-
-        // JavaScript to dynamically set the current year in the footer
-        document.getElementById('currentYear').textContent = new Date().getFullYear();
-
-        // JavaScript for Progressive Image Loading (Blur-up Effect)
-        document.addEventListener('DOMContentLoaded', () => {
-            const lazyImages = document.querySelectorAll('img.lazy-load');
-
-            lazyImages.forEach(img => {
-                const fullSrc = img.getAttribute('data-full-src');
-                if (fullSrc) {
-                    // Create a new image object to load the full-res image
-                    const fullImage = new Image();
-                    fullImage.src = fullSrc;
-
-                    fullImage.onload = () => {
-                        // When the full image loads, update the original img's src
-                        img.src = fullSrc;
-                        // Add 'loaded' class to trigger the CSS transition (unblur/fade in)
-                        img.classList.add('loaded');
-                    };
-
-                    // Optional: Handle error if full image fails to load
-                    fullImage.onerror = () => {
-                        console.error('Failed to load full image:', fullSrc);
-                        // You might want to show a fallback image or remove the blur anyway
-                        img.classList.add('loaded'); // Still remove blur to avoid stuck blurred image
-                    };
-                }
-            });
-        });
-    </script>
-
+    <script src="/js/main.js" defer></script>
 </body>
 
 </html>

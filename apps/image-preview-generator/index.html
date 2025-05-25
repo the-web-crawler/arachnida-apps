@@ -4,29 +4,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A simple online tool to convert images to low-resolution data URIs. Useful for creating lightweight image placeholders and blur-up effects.">
+    <meta name="keywords" content="image converter, data URI, low resolution placeholder, image optimizer, web tool, frontend utility, base64 image">
     <title>Image to Low-Res Data URI Converter</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/global.css">
     <style>
-        /* Base styles */
+        /* App-specific styles */
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f9fafb;
-            color: #1f2937;
+            /* font-family, background-color, color, margin are from global.css */
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            margin: 0;
             padding: 1rem;
             box-sizing: border-box;
         }
 
         /* Container for the app */
         .container {
-            background-color: #ffffff;
+            background-color: var(--white-text); /* Assuming #ffffff is white-text */
             border-radius: 1rem;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            box-shadow: var(--box-shadow-md); /* Using global box shadow */
             padding: 2rem;
             width: 100%;
             max-width: 600px;
@@ -37,16 +37,15 @@
         }
 
         h1 {
+            /* color is now arachnida-purple-text class */
             font-size: 2.25rem;
             font-weight: 700;
-            color: #8b5cf6;
-            /* Arachnida purple */
             margin-bottom: 0.5rem;
         }
 
         p {
             font-size: 1rem;
-            color: #4b5563;
+            color: var(--medium-gray-text); /* Using global variable */
             margin-bottom: 1rem;
         }
 
@@ -58,28 +57,7 @@
             margin-bottom: 1rem;
         }
 
-        .file-input-button {
-            background-color: #8b5cf6;
-            color: white;
-            font-weight: 600;
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.5rem;
-            cursor: pointer;
-            transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            border: none;
-            display: inline-block;
-        }
-
-        .file-input-button:hover {
-            background-color: #7c3aed;
-            transform: translateY(-1px);
-        }
-
-        .file-input-button:active {
-            transform: translateY(0);
-            box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.08), 0 1px 2px -1px rgba(0, 0, 0, 0.04);
-        }
+        /* .file-input-button is now .button-base.button-primary */
 
         .file-input {
             position: absolute;
@@ -93,7 +71,7 @@
 
         /* Output area */
         .output-section {
-            background-color: #f3f4f6;
+            background-color: var(--light-gray-bg); /* Using global variable */
             border-radius: 0.75rem;
             padding: 1.5rem;
             text-align: left;
@@ -104,14 +82,14 @@
         .output-section h3 {
             font-size: 1.25rem;
             font-weight: 600;
-            color: #1f2937;
+            color: var(--dark-gray-text); /* Using global variable */
             margin-bottom: 0.75rem;
         }
 
         .output-image-preview {
             max-width: 100%;
             height: auto;
-            border: 1px solid #e5e7eb;
+            border: 1px solid var(--border-color-light); /* Using global variable */
             border-radius: 0.5rem;
             margin-top: 0.75rem;
             display: block;
@@ -122,7 +100,7 @@
         .data-uri-output {
             font-family: monospace;
             font-size: 0.875rem;
-            background-color: #e5e7eb;
+            background-color: var(--border-color-light); /* Assuming e5e7eb is border-color-light */
             padding: 0.75rem;
             border-radius: 0.5rem;
             white-space: pre-wrap;
@@ -132,28 +110,24 @@
             margin-top: 0.75rem;
         }
 
-        .copy-button {
-            background-color: #4b5563;
-            color: white;
-            font-weight: 500;
-            padding: 0.5rem 1rem;
-            border-radius: 0.375rem;
-            cursor: pointer;
-            transition: background-color 0.2s ease-in-out;
-            border: none;
-            margin-top: 1rem;
+        .button-secondary { /* New class for the copy button */
+            background-color: var(--medium-gray-text);
+            color: var(--white-text);
+            font-weight: 500; /* Specific to this button */
+            padding: 0.5rem 1rem; /* Specific padding */
+            border-radius: 0.375rem; /* Specific radius */
         }
 
-        .copy-button:hover {
-            background-color: #374151;
+        .button-secondary:hover {
+            background-color: var(--dark-gray-text); /* Darken on hover */
         }
 
         .copy-message {
             position: absolute;
             top: 0.5rem;
             right: 0.5rem;
-            background-color: #10b981;
-            color: white;
+            background-color: #10b981; /* Keep specific green for success message */
+            color: var(--white-text);
             padding: 0.25rem 0.5rem;
             border-radius: 0.25rem;
             font-size: 0.75rem;
@@ -179,7 +153,7 @@
 <body>
 
     <div class="container">
-        <h1>Image to Low-Res Data URI</h1>
+        <h1 class="arachnida-purple-text">Image to Low-Res Data URI</h1>
         <p>Upload an image to convert it to a very low-resolution data URI. This is useful for placeholder images (like
             the blur-up effect on your homepage).</p>
 
@@ -194,7 +168,7 @@
         </script>
 
         <div class="file-input-wrapper">
-            <button class="file-input-button">Choose Image</button>
+            <button class="button-base button-primary">Choose Image</button>
             <input type="file" id="imageInput" class="file-input" accept="image/*">
         </div>
 
@@ -211,14 +185,18 @@
         <div id="outputSection" class="output-section hidden">
             <h3>Result:</h3>
             <p>Low-Resolution Preview:</p>
-            <img id="outputImagePreview" class="output-image-preview" src="" alt="Low-Res Preview">
+            <img id="outputImagePreview" class="output-image-preview" src="" alt="Low-resolution image preview">
             <p>Data URI:</p>
             <div id="dataUriOutput" class="data-uri-output"></div>
-            <button id="copyButton" class="copy-button">Copy Data URI</button>
+            <button id="copyButton" class="button-base button-secondary">Copy Data URI</button>
             <span id="copyMessage" class="copy-message">Copied!</span>
         </div>
 
         <canvas id="imageCanvas"></canvas>
+    </div>
+
+    <div style="text-align: center; margin-top: 2rem; margin-bottom: 1rem;">
+        <a href="/" class="button-base">Back to Home</a>
     </div>
 
     <script>
