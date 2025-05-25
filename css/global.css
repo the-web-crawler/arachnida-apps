@@ -113,3 +113,215 @@ h1, h2, h3, h4, h5, h6 {
        margin-bottom: 0.5rem;
    }
 */
+
+/* Restored Styles from original index.html <style> block */
+
+/* Header Banner */
+.header-web-banner {
+    background-color: #f3f4f6; /* This specific gray was not a variable, keeping as is */
+    border-bottom: 2px solid var(--border-color-light);
+    text-align: center;
+    padding: 3rem 1rem;
+    position: relative;
+}
+.header-web-banner h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    position: relative;
+    display: inline-block;
+    /* color is set by .arachnida-purple-text in HTML */
+}
+.header-web-banner h1::before,
+.header-web-banner h1::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 100px;
+    height: 2px;
+    background-color: #a78bfa; /* Lighter purple, not a defined variable */
+    transform: translateY(-50%);
+}
+.header-web-banner h1::before { left: -110px; }
+.header-web-banner h1::after { right: -110px; }
+
+/* Navigation Bar */
+.navbar {
+    background-color: var(--white-text);
+    box-shadow: var(--box-shadow-sm);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+}
+.navbar-container {
+    max-width: 1280px; margin-left: auto; margin-right: auto;
+    padding-left: 1rem; padding-right: 1rem;
+}
+.navbar-content {
+    display: flex; justify-content: center; align-items: center;
+    height: 4rem;
+}
+.navbar-links { display: flex; gap: 1.5rem; }
+.navbar-link {
+    color: var(--medium-gray-text);
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.15s ease-in-out;
+}
+.navbar-link:hover { color: var(--arachnida-purple); }
+
+/* Section Base Styles */
+.section-container {
+    max-width: 1280px; margin-left: auto; margin-right: auto;
+    padding-left: 1.5rem; padding-right: 1.5rem;
+    text-align: center;
+}
+.section-title { /* Applied to h2, h3 */
+    font-size: 1.875rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    /* color is from generic hX rule in global.css */
+}
+.section-subtitle { /* Applied to p */
+    font-size: 1.125rem;
+    color: var(--medium-gray-text);
+    margin-bottom: 2rem;
+    max-width: 42rem;
+    margin-left: auto; margin-right: auto;
+}
+/* Original .section-button styles - HTML uses .button-base.button-primary now */
+/* Keeping for reference or if any direct .section-button use remains or is intended elsewhere */
+.section-button {
+    background-color: var(--arachnida-purple); color: var(--white-text);
+    font-weight: 600; padding: 0.75rem 2rem; /* Note: padding is different from .button-base */
+    border-radius: 0.5rem;
+    box-shadow: var(--box-shadow-sm);
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+    display: inline-block;
+}
+.section-button:hover {
+    box-shadow: var(--box-shadow-md);
+    transform: translateY(-0.125rem);
+    background-color: var(--arachnida-purple-dark);
+}
+
+/* Project Card */
+/* .project-card-wrapper is already in global.css with flex properties */
+.project-card {
+    background-color: var(--white-text);
+    border-radius: 0.75rem;
+    box-shadow: var(--box-shadow-md);
+    overflow: hidden;
+    display: flex; flex-direction: column; justify-content: space-between;
+    transform: scale(1);
+    transition: transform 0.3s ease-in-out;
+    max-width: 28rem;
+    width: 100%; /* Ensures it takes full width on small screens before wrapping */
+}
+.project-card:hover { transform: scale(1.05); }
+
+.project-card-image {
+    width: 100%; height: 14rem;
+    object-fit: cover;
+    /* Initial state for progressive loading (blur-up effect) */
+    filter: blur(10px);
+    opacity: 0.5;
+    transition: filter 0.5s ease-out, opacity 0.5s ease-out;
+}
+.project-card-image.loaded {
+    filter: blur(0);
+    opacity: 1;
+}
+.project-card-content {
+    padding: 1.5rem;
+    display: flex; flex-direction: column;
+    flex-grow: 1;
+}
+.project-card-title { /* Applied to h4 */
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    /* color is from generic hX rule in global.css */
+}
+.project-card-description { /* Applied to p */
+    color: var(--medium-gray-text);
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+    flex-grow: 1;
+}
+.project-card-button { /* Specific button style for project cards */
+    margin-top: auto;
+    align-self: flex-start;
+    background-color: var(--arachnida-purple);
+    color: var(--white-text);
+    font-size: 0.875rem;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    text-decoration: none;
+    transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Matched to button-base */
+}
+.project-card-button:hover {
+    background-color: var(--arachnida-purple-dark); /* Added hover for consistency */
+    box-shadow: var(--box-shadow-sm); /* Matched to button-base */
+}
+
+.more-projects-text {
+    margin-top: 3rem;
+    text-align: center;
+    color: var(--medium-gray-text);
+}
+
+/* About Section Specifics */
+.about-container { /* This is a .section-container variant */
+    max-width: 48rem;
+    /* Other styles from .section-container */
+}
+
+/* Contact Section Specifics */
+.contact-container { /* This is a .section-container variant */
+    max-width: 36rem;
+    /* Other styles from .section-container */
+}
+
+/* Footer */
+.footer {
+    background-color: var(--dark-gray-text);
+    color: #d1d5db; /* Lighter gray text for dark background, not a defined variable */
+    padding-top: 2rem; padding-bottom: 2rem;
+    text-align: center;
+}
+.footer-container { /* Similar to .section-container but for footer */
+    max-width: 1280px; margin-left: auto; margin-right: auto;
+    padding-left: 1.5rem; padding-right: 1.5rem;
+}
+.footer-text-sm { font-size: 0.875rem; }
+.footer-text-xs { font-size: 0.75rem; margin-top: 0.25rem; }
+
+/* Responsive Adjustments (Media Queries) */
+@media (min-width: 768px) { /* md breakpoint */
+    /* .section-padding-base handles this for padding */
+    /* .section-padding is used in original query, keeping for now */
+    .section-padding { /* If any element still uses this directly */
+        padding-top: 6rem;
+        padding-bottom: 6rem;
+    }
+    .section-title { font-size: 2.25rem; } /* For h2, h3 */
+    .section-subtitle { font-size: 1.25rem; } /* For p */
+    .navbar-links { gap: 2.5rem; }
+    .header-web-banner h1 { font-size: 2.5rem; }
+    .header-web-banner h1::before,
+    .header-web-banner h1::after { width: 60px; }
+    .header-web-banner h1::before { left: -70px; }
+    .header-web-banner h1::after { right: -70px; }
+    .projects-section-title { font-size: 2.25rem; } /* This specific class is used in index.html */
+}
+@media (max-width: 480px) {
+    .header-web-banner h1 { font-size: 2rem; }
+    .header-web-banner h1::before,
+    .header-web-banner h1::after { display: none; }
+}
