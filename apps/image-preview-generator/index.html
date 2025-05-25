@@ -34,8 +34,6 @@
             display: flex;
             flex-direction: column;
             gap: 1.5rem;
-            margin-bottom: 1.5rem;
-            /* Add margin below container for ads */
         }
 
         h1 {
@@ -175,36 +173,6 @@
         #imageCanvas {
             display: none;
         }
-
-        /* AdSense Banner Styling (Placeholder) */
-        .adsense-banner {
-            width: 100%;
-            max-width: 600px;
-            margin: 1.5rem auto;
-            background-color: #e0e0e0;
-            border: 1px solid #ccc;
-            border-radius: 0.5rem;
-            padding: 1rem;
-            text-align: center;
-            font-size: 0.9rem;
-            color: #555;
-            min-height: 100px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-        }
-
-        .adsense-banner ins {
-            display: block;
-            background-color: #d0d0d0;
-            width: 100%;
-            height: 90px;
-            line-height: 90px;
-            color: #666;
-            font-size: 0.8rem;
-            border-radius: 0.3rem;
-        }
     </style>
 </head>
 
@@ -214,12 +182,6 @@
         <h1>Image to Low-Res Data URI</h1>
         <p>Upload an image to convert it to a very low-resolution data URI. This is useful for placeholder images (like
             the blur-up effect on your homepage).</p>
-
-        <!-- <div class="adsense-banner">
-            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-                data-ad-slot="YYYYYYYYYY"></ins>
-            <p>Advertisement Placeholder</p>
-        </div> -->
 
         <div class="file-input-wrapper">
             <button class="file-input-button">Choose Image</button>
@@ -236,25 +198,8 @@
             <span id="copyMessage" class="copy-message">Copied!</span>
         </div>
 
-        <!-- <div class="adsense-banner">
-            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-                data-ad-slot="ZZZZZZZZZZ"></ins>
-            <p>Advertisement Placeholder</p>
-        </div> -->
-
         <canvas id="imageCanvas"></canvas>
     </div>
-
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <script>
-        // This line is often automatically handled by the adsbygoogle.js script for <ins> tags
-        // with valid data-ad-client and data-ad-slot attributes.
-        // However, AdSense sometimes provides it explicitly, especially for Auto ads.
-        // If you are using Auto ads, ensure your main <script async src="..."> has the client ID
-        // in its URL (e.g., https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_CLIENT_ID).
-        // For individual ad units, placing this directly after each <ins> tag (as done here) is also common.
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
 
     <script>
         const imageInput = document.getElementById('imageInput');
