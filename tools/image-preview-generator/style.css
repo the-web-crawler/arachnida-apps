@@ -1,0 +1,257 @@
+/* Styles specific to the Image to Low-Res Data URI Converter page */
+
+/* Apply centering to the body for this specific page */
+body {
+    padding-block: 8px;
+    /* Your specified padding */
+    display: flex;
+    min-height: 100vh;
+    justify-content: center;
+    /* Centers horizontally */
+    align-items: center;
+    /* Centers vertically */
+    flex-direction: column;
+}
+
+.container {
+    background-color: #ffffff;
+    border-radius: 1rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    padding: 2rem;
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+h1 {
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: var(--color-arachnida-purple);
+    /* Using CSS variable */
+    margin-bottom: 0.5rem;
+}
+
+p {
+    font-size: 1rem;
+    color: var(--color-gray-600);
+    /* Using CSS variable */
+    margin-bottom: 1rem;
+}
+
+/* Settings Grid for inputs */
+.settings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    /* Responsive grid */
+    gap: 1rem;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background-color: var(--color-gray-100);
+    border-radius: 0.75rem;
+}
+
+.setting-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.5rem;
+}
+
+.setting-item label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-gray-700);
+}
+
+.setting-item input[type="range"] {
+    width: 100%;
+    /* Sliders take full width of their grid item */
+    -webkit-appearance: none;
+    /* Remove default webkit styles */
+    appearance: none;
+    height: 8px;
+    background: var(--color-gray-300);
+    outline: none;
+    border-radius: 5px;
+    transition: background 0.15s ease-in-out;
+}
+
+.setting-item input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    background: var(--color-arachnida-purple);
+    border-radius: 50%;
+    cursor: grab;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background 0.15s ease-in-out;
+}
+
+.setting-item input[type="range"]::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    background: var(--color-arachnida-purple);
+    border-radius: 50%;
+    cursor: grab;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background 0.15s ease-in-out;
+}
+
+.setting-item input[type="range"]:active::-webkit-slider-thumb {
+    cursor: grabbing;
+}
+
+.setting-item input[type="range"]:active::-moz-range-thumb {
+    cursor: grabbing;
+}
+
+.slider-value {
+    font-family: monospace;
+    font-size: 0.85rem;
+    color: var(--color-gray-900);
+    background-color: var(--color-gray-200);
+    padding: 0.2rem 0.5rem;
+    border-radius: 0.25rem;
+    min-width: 40px;
+    /* Ensure consistent width */
+    text-align: center;
+}
+
+
+/* File input styling */
+.file-input-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    margin-bottom: 1rem;
+}
+
+.file-input-button {
+    background-color: var(--color-arachnida-purple);
+    /* Using CSS variable */
+    color: #ffffff;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    border: none;
+    display: inline-block;
+}
+
+.file-input-button:hover {
+    background-color: var(--color-arachnida-purple-hover);
+    /* Using CSS variable */
+    transform: translateY(-1px);
+}
+
+.file-input-button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.08), 0 1px 2px -1px rgba(0, 0, 0, 0.04);
+}
+
+.file-input {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+}
+
+/* Output area */
+.output-section {
+    background-color: var(--color-gray-100);
+    /* Using CSS variable */
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    text-align: left;
+    word-break: break-all;
+    position: relative;
+}
+
+.output-section h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-gray-900);
+    /* Using CSS variable */
+    margin-bottom: 0.75rem;
+}
+
+.output-image-preview {
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--color-gray-200);
+    /* Using CSS variable */
+    border-radius: 0.5rem;
+    margin-top: 0.75rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.data-uri-output {
+    font-family: monospace;
+    font-size: 0.875rem;
+    background-color: var(--color-gray-200);
+    /* Using CSS variable */
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    max-height: 200px;
+    overflow-y: auto;
+    margin-top: 0.75rem;
+    color: var(--color-gray-900);
+    /* Using CSS variable */
+}
+
+/* Button row for copy and download */
+.button-row {
+    display: flex;
+    justify-content: space-between;
+    /* Align buttons to the right */
+    gap: 0.75rem;
+    /* Space between buttons */
+    margin-top: 1rem;
+}
+
+.copy-button,
+.download-button {
+    background-color: var(--color-gray-600);
+    color: white;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    border: none;
+    /* Removed margin-top as it's now in button-row */
+}
+
+.copy-button:hover,
+.download-button:hover {
+    background-color: var(--color-gray-700);
+}
+
+/* Specific style for copy button feedback */
+.copy-button.copied {
+    background-color: #10b981;
+    /* Green color for copied state */
+}
+
+.hidden {
+    display: none;
+}
+
+/* Hidden canvas for image processing */
+canvas {
+    display: none;
+}
