@@ -1,3 +1,5 @@
+/* Styles specific to the main landing page (index.html) */
+
 /* Header Banner Specifics */
 .header-web-banner {
     background-color: var(--color-gray-100);
@@ -76,7 +78,7 @@
     color: var(--color-arachnida-purple);
 }
 
-/* Project Card Specifics */
+/* Project Card Specifics (for both games and tools on landing page) */
 .project-card-wrapper {
     display: flex;
     justify-content: center;
