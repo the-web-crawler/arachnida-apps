@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workout Tracker</title>
+    <style>
+        :root {
+            --bg-color: #1a1a1a;
+            --card-color: #2b2b2b;
+            --text-color: #f0f0f0;
+            --primary-color: #4a90e2;
+            --border-color: #444;
+            --success-color: #2ecc71;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 1.5rem;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr; /* Simplified to a single column */
+            gap: 1.5rem;
+        }
+        h1, h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+        .card {
+            background-color: var(--card-color);
+            border-radius: 8px;
+            padding: 1rem 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        ul { padding-left: 0; list-style-type: none; }
+        li { margin-bottom: 0.75rem; }
+        a { color: var(--primary-color); text-decoration: none; font-weight: 500; }
+        a:hover { text-decoration: underline; }
+        
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.25rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-top: 1rem;
+            transition: background-color 0.2s;
+        }
+        button:hover { background-color: #357abd; }
+        
+        .delete-btn {
+            background-color: #e24a4a;
+            padding: 0.25rem 0.5rem;
+            font-size: 0.8rem;
+            margin: 0 0 0 0.5rem;
+        }
+        .delete-btn:hover { background-color: #c0392b; }
+        
+        #history-list, #editable-exercise-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        #history-list li, #editable-exercise-list li {
+            background-color: #333;
+            padding: 0.75rem;
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        #history-list li .log-details { font-size: 0.9rem; color: #ccc; }
+
+        /* Checklist Styles */
+        #exercise-checklist li {
+            background-color: #333;
+            padding: 1rem;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: background-color 0.2s;
+        }
+        #exercise-checklist input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: var(--success-color);
+        }
+        .exercise-info { flex-grow: 1; }
+        .exercise-target { font-size: 0.9em; color: #bbb; display: block; margin-top: 4px; }
+
+        /* Modal Styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 1000;
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.7);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: var(--card-color);
+            padding: 2rem;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+        }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; }
+        .close-btn { font-size: 2rem; color: #aaa; cursor: pointer; font-weight: bold; }
+        .close-btn:hover { color: white; }
+        .set-log-row { display: flex; gap: 1rem; align-items: center; margin-bottom: 1rem; }
+        .set-log-row label { flex-basis: 100px; text-align: right; margin-right: 0.5rem; }
+        .set-log-row input { width: 100%; padding: 0.5rem; }
+        
+        /* Form grid for new exercises */
+        #add-exercise-form .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+        }
+        #add-exercise-form label {
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+         #add-exercise-form .full-width {
+            grid-column: 1 / -1;
+        }
+
+        input[type="text"], input[type="number"], input[type="url"] {
+             width: 100%;
+             padding: 0.75rem;
+             background-color: var(--bg-color);
+             border: 1px solid var(--border-color);
+             color: var(--text-color);
+             border-radius: 4px;
+             box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>My Workout Tracker</h1>
+
+        <div class="card">
+            <h2>Today's Full-Body Workout</h2>
+            <ul id="exercise-checklist">
+                <!-- Checklist items will be dynamically inserted here -->
+            </ul>
+            <button id="reset-workout-btn" style="background-color: #555; margin-top: 1rem;">Reset Today's Workout</button>
+        </div>
+
+        <div class="card">
+            <h2>Workout History</h2>
+            <ul id="history-list"></ul>
+            <button id="clear-history-btn" class="delete-btn" style="margin-top: 1rem;">Clear All History</button>
+        </div>
+
+        <div class="card">
+            <h2>Edit Exercises</h2>
+            <p>Add or remove exercises from your routine. Changes will be reflected in your next workout.</p>
+            <ul id="editable-exercise-list"></ul>
+            <h3>Add New Exercise</h3>
+            <form id="add-exercise-form">
+                <div class="full-width">
+                    <label for="ex-name-input">Exercise Name</label>
+                    <input type="text" id="ex-name-input" placeholder="e.g., Push-ups" required>
+                </div>
+                <div class="full-width">
+                    <label for="ex-link-input">Link (optional)</label>
+                    <input type="url" id="ex-link-input" placeholder="https://www.wikihow.com/...">
+                </div>
+                
+                <div class="full-width" style="margin-top: 1rem;">
+                    <input type="checkbox" id="ex-timed-checkbox" style="width: auto;">
+                    <label for="ex-timed-checkbox" style="display: inline;">Timed Exercise (like Plank)</label>
+                </div>
+
+                <div id="standard-ex-inputs" class="form-grid full-width">
+                    <div>
+                        <label for="ex-sets-input">Sets</label>
+                        <input type="number" id="ex-sets-input" value="3" min="1">
+                    </div>
+                    <div>
+                        <label for="ex-reps-input">Reps</label>
+                        <input type="number" id="ex-reps-input" value="8" min="1">
+                    </div>
+                    <div>
+                        <label for="ex-weight-input">Weight</label>
+                        <input type="number" id="ex-weight-input" value="10" min="0">
+                    </div>
+                </div>
+
+                <div id="timed-ex-inputs" class="form-grid full-width" style="display: none;">
+                    <div>
+                        <label for="ex-duration-input">Duration (sec)</label>
+                        <input type="number" id="ex-duration-input" value="60" min="1">
+                    </div>
+                </div>
+                
+                <button type="submit" class="full-width">Add Exercise</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- The Modal for Logging Sets -->
+    <div id="log-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">Log Exercise</h2>
+                <span class="close-btn">&times;</span>
+            </div>
+            <form id="modal-log-form">
+                <div id="sets-container">
+                    <!-- Dynamic set inputs will go here -->
+                </div>
+                <button type="submit">Save & Update Plan</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const modal = document.getElementById('log-modal');
+            const closeModalBtn = document.querySelector('.close-btn');
+            let currentExerciseId = null;
+
+            // --- STATE MANAGEMENT ---
+            let exercises = [];
+            let history = [];
+
+            // --- DEFAULT DATA WITH PROGRESSION ---
+            const defaultExercises = [
+                { id: "squats", name: "Weighted Squats", link: "https://www.wikihow.com/Perform-a-Weighted-Squat", isTimed: false, progression: { sets: 3, reps: 8, weight: 20 } },
+                { id: "bench", name: "Dumbbell Bench Press", link: "https://www.wikihow.com/Dumbbell-Press", isTimed: false, progression: { sets: 3, reps: 8, weight: 15 } },
+                { id: "row", name: "Dumbbell Row", link: "https://www.wikihow.com/Work-out-With-Dumbbells", isTimed: false, progression: { sets: 3, reps: 8, weight: 15 } },
+                { id: "rdl", name: "Dumbbell RDL", link: "https://www.wikihow.com/Do-a-Romanian-Deadlift", isTimed: false, progression: { sets: 3, reps: 10, weight: 10 } },
+                { id: "plank", name: "Plank", link: "https://www.wikihow.com/How-Long-to-Hold-a-Plank-As-a-Beginner", isTimed: true, progression: { sets: 1, reps: 60, weight: 0 } },
+                { id: "latraise", name: "Lateral Raises", link: "https://www.wikihow.com/Do-a-Lateral-Raise", isTimed: false, progression: { sets: 2, reps: 12, weight: 8 } }
+            ];
+
+            // --- LOCALSTORAGE FUNCTIONS ---
+            function saveData() {
+                localStorage.setItem('workoutApp.exercises', JSON.stringify(exercises));
+                localStorage.setItem('workoutApp.history', JSON.stringify(history));
+            }
+
+            function loadData() {
+                const storedExercises = localStorage.getItem('workoutApp.exercises');
+                exercises = storedExercises ? JSON.parse(storedExercises) : [...defaultExercises];
+                if (exercises.length === 0) exercises = [...defaultExercises];
+
+                const storedHistory = localStorage.getItem('workoutApp.history');
+                history = storedHistory ? JSON.parse(storedHistory) : [];
+            }
+
+            // --- RENDER FUNCTIONS ---
+            function renderAll() {
+                renderWorkoutChecklist();
+                renderHistory();
+                renderEditableExerciseList();
+            }
+
+            function renderWorkoutChecklist() {
+                const list = document.getElementById('exercise-checklist');
+                list.innerHTML = '';
+                exercises.forEach(ex => {
+                    const li = document.createElement('li');
+                    
+                    const checkbox = document.createElement('input');
+                    checkbox.type = 'checkbox';
+                    checkbox.dataset.exerciseId = ex.id;
+                    checkbox.onchange = (e) => {
+                        if (e.target.checked) {
+                            openLogModal(ex.id);
+                        }
+                    };
+
+                    const infoDiv = document.createElement('div');
+                    infoDiv.className = 'exercise-info';
+                    
+                    if (ex.link) {
+                        infoDiv.innerHTML = `<a href="${ex.link}" target="_blank" rel="noopener noreferrer">${ex.name}</a>`;
+                    } else {
+                        infoDiv.textContent = ex.name;
+                    }
+
+                    const targetSpan = document.createElement('span');
+                    targetSpan.className = 'exercise-target';
+                    if (ex.isTimed) {
+                        targetSpan.textContent = `Target: Hold for ${ex.progression.reps} seconds`;
+                    } else {
+                        targetSpan.textContent = `Target: ${ex.progression.sets}x${ex.progression.reps} reps @ ${ex.progression.weight} lbs (last set AMRAP)`;
+                    }
+                    infoDiv.appendChild(targetSpan);
+
+                    li.appendChild(checkbox);
+                    li.appendChild(infoDiv);
+                    list.appendChild(li);
+                });
+            }
+
+            function renderHistory() {
+                const list = document.getElementById('history-list');
+                list.innerHTML = '';
+                history.slice().reverse().forEach((item, index) => {
+                    const li = document.createElement('li');
+                    const originalIndex = history.length - 1 - index;
+                    const exercise = exercises.find(ex => ex.id === item.exerciseId);
+                    if (!exercise) return; // Skip rendering if exercise was deleted
+
+                    const exerciseName = exercise.name;
+                    let details;
+                    if (exercise.isTimed) {
+                        details = `<strong>${exerciseName}</strong> 
+                                   <span class="log-details">(${item.sets[0].reps} seconds) on ${item.date}</span>`;
+                    } else {
+                        let setsDetail = item.sets.map(s => s.reps).join(', ');
+                        details = `<strong>${exerciseName}</strong> @ ${item.weight} lbs
+                                   <span class="log-details">(${setsDetail}) on ${item.date}</span>`;
+                    }
+                    
+                    li.innerHTML = `
+                        <span>${details}</span>
+                        <button class="delete-btn" data-index="${originalIndex}">X</button>
+                    `;
+                    list.appendChild(li);
+                });
+            }
+
+            function renderEditableExerciseList() {
+                 const list = document.getElementById('editable-exercise-list');
+                list.innerHTML = '';
+                exercises.forEach((ex) => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `
+                        <span>
+                            ${ex.link ? `<a href="${ex.link}" target="_blank">${ex.name}</a>` : ex.name}
+                        </span>
+                        <button class="delete-btn" data-id="${ex.id}">Delete</button>
+                    `;
+                    list.appendChild(li);
+                });
+            }
+
+            // --- PROGRESSION & REGRESSION LOGIC ---
+            function processProgression(exercise, log) {
+                const prog = exercise.progression;
+
+                if (exercise.isTimed) {
+                    const performedSeconds = log.sets[0].reps;
+                    if (performedSeconds >= prog.reps) {
+                        prog.reps += 10;
+                    }
+                    return;
+                }
+                
+                const setsPerformed = log.sets;
+                const amrapSet = setsPerformed[prog.sets - 1];
+
+                // Regression: If final set is below base rep target
+                if (amrapSet && amrapSet.reps < prog.reps) {
+                    prog.weight = Math.max(0, prog.weight - 5);
+                    return;
+                }
+
+                // Progression: Check if all straight sets are met and AMRAP exceeds a threshold
+                let allStraightSetsMet = true;
+                for (let i = 0; i < prog.sets - 1; i++) {
+                    if (setsPerformed[i].reps < prog.reps) {
+                        allStraightSetsMet = false;
+                        break;
+                    }
+                }
+                
+                // New Progression Rule: Progress if AMRAP set is 5+ reps over the base rep target
+                const progressionThreshold = prog.reps + 5;
+                const amrapSetMetProgressionTarget = amrapSet && amrapSet.reps >= progressionThreshold;
+
+                if (allStraightSetsMet && amrapSetMetProgressionTarget) {
+                    if (prog.sets < 5) {
+                        prog.sets++;
+                    } else {
+                        prog.sets = 3;
+                        prog.weight += 5;
+                    }
+                }
+            }
+
+            // --- MODAL & EVENT HANDLERS ---
+            function openLogModal(exerciseId) {
+                currentExerciseId = exerciseId;
+                const exercise = exercises.find(ex => ex.id === exerciseId);
+                document.getElementById('modal-title').textContent = `Log: ${exercise.name}`;
+                
+                const setsContainer = document.getElementById('sets-container');
+                setsContainer.innerHTML = '';
+
+                if (exercise.isTimed) {
+                    const setRow = document.createElement('div');
+                    setRow.className = 'set-log-row';
+                    setRow.innerHTML = `
+                        <label>Time:</label>
+                        <input type="number" class="reps-input" value="${exercise.progression.reps}" required>
+                        <span>seconds</span>
+                    `;
+                    setsContainer.appendChild(setRow);
+                } else {
+                    const weightRow = document.createElement('div');
+                    weightRow.className = 'set-log-row';
+                    weightRow.innerHTML = `
+                        <label>Weight:</label>
+                        <input type="number" id="modal-weight-input" value="${exercise.progression.weight}" min="0">
+                        <span>lbs</span>
+                    `;
+                    setsContainer.appendChild(weightRow);
+
+                    for (let i = 0; i < exercise.progression.sets; i++) {
+                        const isAmrap = i === exercise.progression.sets - 1;
+                        const repRow = document.createElement('div');
+                        repRow.className = 'set-log-row';
+                        const labelText = isAmrap ? `AMRAP Set:` : `Set ${i + 1} Reps:`;
+                        repRow.innerHTML = `
+                            <label>${labelText}</label>
+                            <input type="number" class="reps-input" value="${isAmrap ? '' : exercise.progression.reps}" placeholder="${isAmrap ? 'AMRAP reps' : ''}" required>
+                        `;
+                        setsContainer.appendChild(repRow);
+                    }
+                }
+                modal.style.display = 'flex';
+            }
+
+            function closeModal() {
+                const checkbox = document.querySelector(`input[data-exercise-id="${currentExerciseId}"]`);
+                if(checkbox) checkbox.checked = false;
+                currentExerciseId = null;
+                modal.style.display = 'none';
+            }
+
+            closeModalBtn.onclick = closeModal;
+            window.onclick = (event) => { if (event.target == modal) closeModal(); };
+
+            document.getElementById('modal-log-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const exercise = exercises.find(ex => ex.id === currentExerciseId);
+                
+                const log = {
+                    exerciseId: currentExerciseId,
+                    date: new Date().toLocaleDateString(),
+                    weight: 0,
+                    sets: []
+                };
+
+                if (exercise.isTimed) {
+                    const seconds = parseInt(document.querySelector('.reps-input').value);
+                    log.sets.push({ reps: seconds });
+                } else {
+                    log.weight = document.getElementById('modal-weight-input').value;
+                    const repInputs = document.querySelectorAll('.reps-input');
+                    repInputs.forEach(input => {
+                        log.sets.push({ reps: parseInt(input.value) });
+                    });
+                }
+
+                history.push(log);
+                processProgression(exercise, log);
+                saveData();
+                renderAll();
+                closeModal();
+            });
+            
+            // --- ADD/DELETE/RESET HANDLERS ---
+            document.getElementById('ex-timed-checkbox').addEventListener('change', (e) => {
+                const isChecked = e.target.checked;
+                document.getElementById('standard-ex-inputs').style.display = isChecked ? 'none' : 'grid';
+                document.getElementById('timed-ex-inputs').style.display = isChecked ? 'grid' : 'none';
+            });
+
+            document.getElementById('add-exercise-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const name = document.getElementById('ex-name-input').value;
+                const isTimed = document.getElementById('ex-timed-checkbox').checked;
+
+                const newEx = {
+                    id: Date.now().toString(), // Use timestamp for unique ID
+                    name: name,
+                    link: document.getElementById('ex-link-input').value,
+                    isTimed: isTimed,
+                    progression: {}
+                };
+                
+                if (isTimed) {
+                    newEx.progression = {
+                        sets: 1,
+                        reps: parseInt(document.getElementById('ex-duration-input').value),
+                        weight: 0
+                    };
+                } else {
+                    newEx.progression = {
+                        sets: parseInt(document.getElementById('ex-sets-input').value),
+                        reps: parseInt(document.getElementById('ex-reps-input').value),
+                        weight: parseInt(document.getElementById('ex-weight-input').value)
+                    };
+                }
+
+                exercises.push(newEx);
+                saveData();
+                renderAll();
+                e.target.reset();
+                // Manually trigger checkbox change to reset form visibility
+                document.getElementById('ex-timed-checkbox').dispatchEvent(new Event('change'));
+            });
+
+            document.addEventListener('click', (e) => {
+                if(e.target.matches('#editable-exercise-list .delete-btn')) {
+                    const idToDelete = e.target.dataset.id;
+                    exercises = exercises.filter(ex => ex.id !== idToDelete);
+                    saveData();
+                    renderAll();
+                }
+                if(e.target.matches('#history-list .delete-btn')) {
+                    const indexToDelete = parseInt(e.target.dataset.index);
+                    history.splice(indexToDelete, 1);
+                    saveData();
+                    renderAll();
+                }
+            });
+
+            document.getElementById('clear-history-btn').addEventListener('click', () => {
+                if (confirm('Are you sure you want to delete ALL workout history?')) {
+                    history = [];
+                    saveData();
+                    renderHistory();
+                }
+            });
+            
+            document.getElementById('reset-workout-btn').addEventListener('click', () => {
+                document.querySelectorAll('#exercise-checklist input[type="checkbox"]').forEach(cb => {
+                    cb.checked = false;
+                });
+            });
+
+            // --- INITIALIZATION ---
+            loadData();
+            renderAll();
+        });
+    </script>
+</body>
+</html>
