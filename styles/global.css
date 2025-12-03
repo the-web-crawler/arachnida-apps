@@ -121,9 +121,32 @@ body {
     font-size: 0.875rem;
 }
 
+.footer-links {
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.footer-links a {
+    color: var(--color-text-light);
+    text-decoration: none;
+    font-size: 0.875rem;
+    transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+    color: #ffffff;
+}
+
+.separator {
+    color: var(--color-gray-600);
+}
+
 .footer-text-xs {
     font-size: 0.75rem;
-    margin-top: 0.25rem;
+    margin-top: 0.5rem;
 }
 
 /* Responsive Adjustments (Global) */
